@@ -93,9 +93,15 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
-        color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        if len(str(tiles[mark])) > 1:
+            goto(x, y)
+            color('black')
+            write(tiles[mark], font=('Arial', 28, 'normal'))
+        else:
+            goto(x + 14, y)
+            color('black')
+            write(tiles[mark], font=('Arial', 28, 'normal'))
+                 
     
     #Write the number of taps
     global counter
@@ -108,7 +114,7 @@ def draw():
     ontimer(draw, 100)
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(490, 490, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
