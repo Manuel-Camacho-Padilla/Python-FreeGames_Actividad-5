@@ -19,6 +19,7 @@ tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 counter = 0
+couple = 0
 
 def index(x, y):
     "Convert (x, y) coordinates to tiles index."
@@ -70,10 +71,12 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+        global couple
+        couple =+ 1
+        
    
     #Each taps increments by 1
     global counter
-
     counter = counter + 1
 
 def draw():
@@ -109,7 +112,18 @@ def draw():
     goto(-205, 205)
     color('black')
     write(f"Taps:{counter}", font=('Arial', 12, 'normal'))
-
+    
+    up()
+    goto(140, 205)
+    color('black')
+    write(f"Pairs:{couple}", font=('Arial', 12, 'normal'))
+    
+    if couple == 32:
+        up()
+        goto(-115, 205)
+        color('blue')
+        write("All cards are uncovered!", font=('Arial', 12, 'normal'))
+    
     update()
     ontimer(draw, 100)
 
