@@ -20,21 +20,40 @@ state = {'mark': None}
 hide = [True] * 64
 counter = 0
 
+def index(x, y):
+    "Convert (x, y) coordinates to tiles index."
+    return int((x + 200) // 50 + ((y + 200) // 50) * 8)
+
 def square(x, y):
     "Draw white square with black outline at (x, y)."
     up()
     goto(x, y)
+    i = index(x, y)
     down()
-    color('black', 'white')
+
+    #Add different colors for the different rows
+    if i > 55:
+        color('black', 'darkblue')
+    elif i > 47:
+        color('black', 'blueviolet')
+    elif i > 39:
+                color('black', 'deeppink')
+    elif i > 31:
+                color('black', 'crimson')
+    elif i > 23:
+                color('black', 'darkorange')
+    elif i > 15:
+                color('black', 'gold')
+    elif i > 7:
+                color('black', 'yellowgreen')
+    elif i >= 0:
+                color('black', 'mediumaquamarine')
+
     begin_fill()
     for count in range(4):
         forward(50)
         left(90)
     end_fill()
-
-def index(x, y):
-    "Convert (x, y) coordinates to tiles index."
-    return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
 def xy(count):
     "Convert tiles count to (x, y) coordinates."
